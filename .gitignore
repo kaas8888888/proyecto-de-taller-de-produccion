@@ -1,0 +1,65 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+public class LeerFichero2 {
+    public static void main(String[] args) 
+    {
+        int tema, j=0;
+        System.out.println("Cual tema quieres ver:\nPantalla =0\nConexion a internet =6\nArchivos office descargados de internet =11\nEnvio de archivos en correo electronico =14\nProblemas con el navegador de Internet =17\nProblemas con el audio de la ocmputadora =23\nProblemas con la reproduccion del video=26\n");
+        Scanner scanIn = new Scanner(System.in);
+        tema = scanIn.nextInt();
+
+       scanIn.close(); 
+        File f = new File("C:\\Users\\KAAS888\\Desktop\\entrada.dat");
+        int suma = 0, cont = 0, i=0, contador=0, contador2=0;
+
+         String[] numero=new String[50];
+         String[] resultado= new String [50];
+        Scanner entrada = null;
+        try {
+            entrada = new Scanner(f);
+            while (entrada.hasNextLine()) {
+                   numero[contador++] = entrada.nextLine();
+                   cont++;                 
+            }
+        
+        
+            for(i=tema;;i++)
+            {        
+                System.out.println(numero[i]);
+                resultado[j]=numero[i];
+                if(numero[i].equals("*"))
+                {
+                    break;
+                }
+                j++;
+                contador2++;
+            }
+        
+            FileWriter fichero=null;
+            try{
+            fichero= new FileWriter("C:\\Users\\KAAS888\\Desktop\\salida.dat");
+            for(j=0;j<=contador2;j++)
+            {    
+            fichero.write(resultado[j]);
+            }
+            fichero.close();
+            }
+
+            catch (Exception ex)
+            {
+                System.out.println("mensaje de excepcion"+ex.getMessage());
+            }
+           
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } finally{
+            entrada.close();
+        }
+    }
+}
